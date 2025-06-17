@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function(){
     form.addEventListener('submit', function(event)) {
         event.preventDefault(); 
     }
-
     /*retrieve and trim user inputs*/
     let username = document.getElementById(username).value.trim(); 
     let email = document.getElementById(email).value.trim();
@@ -19,6 +18,17 @@ document.addEventListener('DOMContentLoaded', function(){
     let isValid = true;
     let messages = [];
 
+     /*Display feedback*/
+    feedbackDiv.style.display = "block";
+
+    if (isValid) {
+        feedbackDiv.textContent = "Registration Successful";
+        feedbackDiv.style.color = "#28a745"; // green color
+    } else {
+        feedbackDiv.innerHTML = messages.join("<br>");
+        feedbackDiv.style.color = "#dc3545"; // red color
+    }
+    
     /*validate username, email and password*/
     if (username.length < 3) {
         isValid = false;
@@ -35,16 +45,5 @@ document.addEventListener('DOMContentLoaded', function(){
     if (password.length < 8) {
         isValid = false;
         messages.push("password too short");
-    }
-
-    /*Display feedback*/
-    feedbackDiv.style.display = "block";
-
-    if (isValid) {
-        feedbackDiv.textContent = "Registration Successful";
-        feedbackDiv.style.color = "#28a745"; // green color
-    } else {
-        feedbackDiv.innerHTML = messages.join("<br>");
-        feedbackDiv.style.color = "#dc3545"; // red color
     }
 });
